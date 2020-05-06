@@ -17,6 +17,7 @@ public class CommandLine {
      */
     public void open() {
 
+        // TODO ゲームの開始時に行×列、爆弾の数を動的に変えられるようにする。
         engine.init(10,10,15);
 
         System.out.print(">");

@@ -1,5 +1,6 @@
 package game.contents;
 
+import game.Engine;
 import game.contents.cell.BlankCell;
 import game.contents.cell.BombCell;
 import game.contents.cell.NumberCell;
@@ -9,7 +10,14 @@ import java.util.Random;
 
 public class BoardFactory {
 
-    public static Board newBoard(int rows, int lines, int bombs) {
+    /**
+     * Boardオブジェクトを生成するstaticファクトリ
+     * @param rows 行数
+     * @param lines 列数
+     * @param bombs 爆弾の数
+     * @return Boardオブジェクト
+     */
+    public static Board newBoard(int rows, int lines, int bombs, Engine engine) {
 
         Cell[][] cells = new Cell[rows][lines];
 
@@ -19,7 +27,7 @@ public class BoardFactory {
 
         fillBlank(rows, lines, cells);
 
-        return new Board(rows, lines, bombs ,cells);
+        return new Board(rows, lines, bombs ,engine, cells);
 
     }
 

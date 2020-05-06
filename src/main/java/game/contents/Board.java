@@ -1,9 +1,8 @@
 package game.contents;
 
+import game.Engine;
 import game.commands.Command;
 import lombok.Getter;
-
-import java.util.stream.Collectors;
 
 /**
  * ゲーム盤クラス
@@ -20,14 +19,18 @@ public class Board {
     @Getter
     private final int bombs;
 
+    // ゲームエンジン
+    private final Engine engine;
+
     // セル
     @Getter
     private final Cell[][] cells;
 
-    public Board(int rows, int lines, int bombs, Cell[][] cells) {
+    public Board(int rows, int lines, int bombs, Engine engine, Cell[][] cells) {
         this.rows = rows;
         this.lines = lines;
         this.bombs =  bombs;
+        this.engine = engine;
         this.cells = cells;
     }
 
@@ -46,10 +49,11 @@ public class Board {
      * @param x x座標
      * @param y y座標
      * @param command 実行するコマンド
+     * @return 爆弾を踏んだ場合はtrue
      */
-    public void updateCell(int x, int y, Command command) {
+    public boolean updateCell(int x, int y, Command command) {
         Cell cell = cells[x][y];
-        command.execute(cell);
+        return command.execute(engine, cell);
     }
 
     /**
@@ -60,7 +64,7 @@ public class Board {
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < lines; y++) {
                 Cell cell = cells[x][y];
-                command.execute(cell);
+                command.execute(engine, cell);
             }
         }
     }

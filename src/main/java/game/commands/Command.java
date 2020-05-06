@@ -1,5 +1,6 @@
 package game.commands;
 
+import game.Engine;
 import game.contents.Cell;
 
 /**
@@ -10,8 +11,9 @@ public interface Command {
     /**
      * コマンドの実行
      * @param cell 対象セル
+     * @return コマンドの実行で爆弾を踏んだ場合はtrue
      */
-    void execute(Cell cell);
+    boolean execute(Engine engine, Cell cell);
 
     /**
      * 与えられた文字列からコマンドを生成するstaticファクトリメソッド

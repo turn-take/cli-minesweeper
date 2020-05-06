@@ -1,7 +1,9 @@
 package game.contents.cell.logic;
 
 import game.contents.Cell;
+import game.contents.cell.BlankCell;
 import game.contents.cell.BombCell;
+import game.contents.cell.NumberCell;
 
 /**
  * セルのロジッククラス
@@ -124,7 +126,34 @@ public class CellLogic {
      * @param cells セル配列
      * @return 爆弾セルの場合はtrue
      */
-    private static boolean isBombCell(int x, int y, Cell[][] cells) {
+    public static boolean isBombCell(int x, int y, Cell[][] cells) {
         return cells[x][y] instanceof BombCell;
+    }
+
+    /**
+     * 与えられたセルが爆弾セルかを返す。
+     * @param cell 対象セル
+     * @return 爆弾セルの場合はtrue
+     */
+    public static boolean isBombCell(Cell cell) {
+        return cell instanceof BombCell;
+    }
+
+    /**
+     * 与えられたセルが空白セルかを返す。
+     * @param cell 対象セル
+     * @return 空白セルの場合はtrue
+     */
+    public static boolean isBlankCell(Cell cell) {
+        return cell instanceof BlankCell;
+    }
+
+    /**
+     * 与えられたセルが数字セルかを返す。
+     * @param cell 対象セル
+     * @return 数字セルの場合はtrue
+     */
+    public static boolean isNumberCell(Cell cell) {
+        return cell instanceof NumberCell;
     }
 }

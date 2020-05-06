@@ -36,7 +36,7 @@ public class Engine {
      * @param bombs 爆弾の数
      */
     public void init(int rows, int lines, int bombs) {
-        board = BoardFactory.newBoard(rows, lines, bombs);
+        board = BoardFactory.newBoard(rows, lines, bombs, this);
         drawer.draw(board);
     }
 
@@ -47,7 +47,7 @@ public class Engine {
      * @return ゲームが終了している場合はtrue
      */
     public boolean parseCommand(String commandStr) throws IllegalArgumentException{
-        boolean result = false;
+        boolean isGameOver;
 
         // 全部開く裏コマンド
         if(commandStr.equals("all")) {
@@ -70,11 +70,17 @@ public class Engine {
             Objects.requireNonNull(action);
 
             Command command = Command.of(action);
-            board.updateCell(x, y, command);
+            isGameOver = board.updateCell(x, y, command);
+
+            if(isGameOver) {
+                board.updateAllCell(new OpenCommand());
+            }
+
             drawer.draw(board);
         } catch (ArrayIndexOutOfBoundsException | IllegalArgumentException | NullPointerException e) {
+            drawer.draw(board);
             throw new IllegalArgumentException("Invalid command.");
         }
-        return result;
+        return isGameOver;
     }
 }

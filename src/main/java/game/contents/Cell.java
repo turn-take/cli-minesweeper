@@ -3,8 +3,6 @@ package game.contents;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 /**
  * セルの抽象クラス
  */
@@ -58,20 +56,7 @@ public abstract class Cell {
      * フラグを反転させる
      */
     public void reverseFlag() {
-        flag = flag ? false : true;
+        flag = !flag;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cell cell = (Cell) o;
-        return x == cell.x &&
-                y == cell.y;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
 }
